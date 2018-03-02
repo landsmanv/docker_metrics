@@ -1,0 +1,11 @@
+#/usr/lib/systemd/system/format-btrfs.service
+[Unit]
+Description=format disk and mount (azure ephemeral storage)
+After=mount_btrfs.service
+ConditionPathExists=!/var/lib/docker/btrfs
+
+[Service]
+Type=oneshot
+ExecStartPre=/usr/bin/mkdir -p /var/lib/docker
+ExecStart=/usr/sbin/mkfs.btrfs -f /dev/sdb
+ExecStartPost=/usr/bin/mount /dev/sdb -o noatime,ssd,compress=zlib /var/lib/docker

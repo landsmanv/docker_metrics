@@ -1,0 +1,16 @@
+#/etc/docker/docker-compose.yml
+version: '3.4'
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    network_mode: "bridge"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/docker/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    ports:
+      - 9090:9090
+    restart: always
+volumes:
+  prometheus_data:

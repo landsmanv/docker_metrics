@@ -1,0 +1,14 @@
+#/usr/lib/systemd/system/mount-btrfs.service
+[Unit]
+Description=Mount disk for docker (Azure ephemeral storage)
+After=waagent.service
+ConditionPathExists=!/var/lib/docker/btrfs
+
+[Service]
+Type=oneshot
+ExecStartPre=/usr/bin/mkdir -p /var/lib/docker
+ExecStart=/usr/bin/mount /dev/sdb -o noatime,ssd,compress=zlib /var/lib/docker
+
+[Install]
+WantedBy=multi-user.target
+

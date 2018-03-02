@@ -1,0 +1,15 @@
+#/usr/lib/systemd/system/docker-compose.service
+[Unit]
+Description=Docker compose
+After=network.target docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+
+ExecStartPre=/usr/local/bin/docker-compose -f /etc/docker/docker-compose.yml pull
+ExecStart=/usr/local/bin/docker-compose -f /etc/docker/docker-compose.yml up -d
+ExecStop=/usr/local/bin/docker-compose -f /etc/docker/docker-compose.yml down
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,16 @@
+#/etc/docker/docker-compose.yml
+version: '3.4'
+services:
+  cadvisor:
+    network_mode: "bridge"
+    privileged: true
+    image: google/cadvisor:latest
+    container_name: cadvisor
+    hostname: '{{.Node.Hostname}}'
+    ports:
+      - 8080:8080
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
