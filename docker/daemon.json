@@ -1,0 +1,9 @@
+#/etc/docker/daemon.json
+{
+  "hosts": ["unix://var/run/docker.sock", "0.0.0.0:4243"],
+  "insecure-registries": ["h-00000000.cloud.net:5000"],
+  "live-restore": false,
+  "dns": ["172.17.0.1"],
+  "metrics-addr" : "127.0.0.1:9323",
+  "experimental" : true
+}
