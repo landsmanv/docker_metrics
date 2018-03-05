@@ -1,0 +1,10 @@
+#/usr/lib/systemd/system/cadvisor.service
+[Unit]
+Description=cAdvisor
+After=network.target docker.service
+
+[Service]
+ExecStart=/usr/local/bin/cadvisor
+
+[Install]
+WantedBy=multi-user.target
