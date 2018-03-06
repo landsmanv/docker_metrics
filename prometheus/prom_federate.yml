@@ -1,0 +1,19 @@
+#/etc/docker/prometheus.yml
+scrape_configs:
+  - job_name: 'federate'
+    scrape_interval: 15s
+
+    honor_labels: true
+    metrics_path: '/federate'
+
+    params:
+      'match[]':
+        - '{job="prometheus"}'
+        - '{__name__=~"job:.*"}'
+
+    static_configs:
+      - targets:
+        # prometheus North Europe
+        - h-00000001.eu-n-1.cloud.net:9090
+        # prometheus Central Europe
+        - h-00000002.eu-c-1.cloud.net:9090
