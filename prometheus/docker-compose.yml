@@ -13,4 +13,4 @@ services:
       - 9090:9090
     restart: always
 volumes:
-  prometheus_data:
+  prometheus_data: {}
